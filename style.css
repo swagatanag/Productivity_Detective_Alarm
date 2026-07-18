@@ -1,1 +1,350 @@
+/* Core Styling Matrix & Properties */
+:root {
+    --bg-base: #0a050d;
+    --bg-surface: rgba(26, 10, 26, 0.65);
+    --pink-neon: #ff2a74;
+    --purple-glow: #b026ff;
+    --cyan-accent: #00f2fe;
+    --text-main: #ffe6f2;
+    --text-muted: #8b708b;
+    --border-neon: rgba(255, 42, 116, 0.2);
+    --theme-glow: 0 0 25px rgba(255, 42, 116, 0.25);
+}
 
+/* Base Document Configuration resets */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: radial-gradient(circle at 50% 0%, #290829 0%, var(--bg-base) 80%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+body.lockdown-active {
+    animation: redAlert 1s infinite alternate steps(5);
+}
+
+/* Header & Navigation Navigation Elements */
+header {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-neon);
+}
+
+.logo { 
+    font-size: 20px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: var(--pink-neon); 
+    text-shadow: 0 0 10px var(--pink-neon); 
+}
+
+nav { 
+    display: flex; 
+    gap: 20px; 
+}
+
+nav button { 
+    background: none; 
+    border: 1px solid transparent; 
+    color: var(--text-muted); 
+    font-family: inherit; 
+    font-size: 14px; 
+    font-weight: 600; 
+    padding: 8px 16px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+}
+
+nav button.active-nav { 
+    color: var(--pink-neon); 
+    border-color: var(--pink-neon); 
+    background: rgba(255, 42, 116, 0.05); 
+    box-shadow: 0 0 10px rgba(255, 42, 116, 0.2); 
+}
+
+/* Structural Interface Routing Grid Components */
+.app-view { 
+    display: none; 
+    width: 100%; 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    padding: 30px 20px; 
+    flex-grow: 1; 
+}
+
+.app-view.active-view { 
+    display: grid; 
+}
+
+#view-dashboard { 
+    grid-template-columns: 1fr 420px; 
+    gap: 30px; 
+}
+
+#view-arena, #view-report { 
+    grid-template-columns: 1fr; 
+    justify-items: center; 
+}
+
+.column-group {
+    display: flex; 
+    flex-direction: column; 
+    gap: 25px;
+}
+
+/* Glassmorphism Structural Cards UI */
+.glass-panel {
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-neon);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--theme-glow);
+}
+
+.panel-feed {
+    padding: 16px;
+}
+
+.panel-subtitle {
+    margin-bottom: 15px; 
+    font-size: 16px; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em;
+}
+
+.panel-tally {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.panel-intel {
+    flex-grow: 1; 
+    font-size: 14px; 
+    color: var(--text-muted); 
+    line-height: 1.6;
+}
+
+.intel-title {
+    color: var(--text-main); 
+    font-size: 15px; 
+    margin-bottom: 6px; 
+    text-transform: uppercase;
+}
+
+/* Camera Video Interface Display Elements */
+.feed-box { 
+    position: relative; 
+    width: 100%; 
+    height: 480px; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    border: 2px solid rgba(255, 42, 116, 0.1); 
+}
+
+video, canvas { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transform: scaleX(-1); 
+}
+
+/* Telemetry Dashboard Data Indicators */
+.spark-box { 
+    width: 100%; 
+    height: 140px; 
+    background: rgba(0,0,0,0.3); 
+    border-radius: 14px; 
+    overflow: hidden; 
+    margin-top: 15px; 
+    border: 1px solid rgba(255,42,116,0.1); 
+}
+
+.value-huge { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 48px; 
+    font-weight: 700; 
+    color: var(--pink-neon); 
+    text-shadow: 0 0 15px rgba(255, 42, 116, 0.5); 
+}
+
+.matrix-readout {
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 13px; 
+    margin-top: 10px;
+}
+
+.stat-label {
+    color: var(--text-muted); 
+    font-size: 12px; 
+    text-transform: uppercase;
+}
+
+.stat-sub {
+    font-size: 11px; 
+    color: var(--pink-neon); 
+    margin-top: 2px;
+}
+
+/* Reflex Interactive Challenge Arena Styles */
+.arena-header {
+    width: 100%; 
+    max-width: 800px; 
+    text-align: center; 
+    margin-bottom: 20px;
+}
+
+.arena-desc {
+    color: var(--text-muted); 
+    font-size: 14px; 
+    margin-top: 4px;
+}
+
+.arena-zone { 
+    position: relative; 
+    width: 100%; 
+    max-width: 800px; 
+    height: 500px; 
+    background: #050107; 
+    border: 2px dashed var(--pink-neon); 
+    border-radius: 20px; 
+    overflow: hidden; 
+}
+
+.target-node { 
+    position: absolute; 
+    width: 45px; 
+    height: 45px; 
+    background: var(--cyan-accent); 
+    border: 3px solid white; 
+    border-radius: 50%; 
+    box-shadow: 0 0 20px var(--cyan-accent); 
+    cursor: pointer; 
+    transition: transform 0.1s; 
+    transform: translate(-50%, -50%); 
+    display: none; 
+    animation: targetPulse 0.5s infinite alternate; 
+}
+
+/* Control Element Layout Adjustments */
+.panel-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: rgba(0,0,0,0.2); 
+    padding: 14px; 
+    border-radius: 12px; 
+    margin-top: 10px; 
+}
+
+.row-label {
+    font-size: 14px; 
+    color: var(--text-muted);
+}
+
+select, input[type="range"] { 
+    background: #1a081a; 
+    border: 1px solid var(--border-neon); 
+    color: white; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    outline: none; 
+}
+
+/* Session Diagnostic Audit Logs Components */
+.audit-box {
+    width: 100%; 
+    max-width: 600px; 
+    text-align: center; 
+    padding: 40px;
+}
+
+.final-score {
+    font-size: 72px; 
+    margin: 15px 0;
+}
+
+.chart-title {
+    color: var(--text-muted); 
+    font-size: 12px; 
+    text-transform: uppercase; 
+    text-align: left; 
+    margin-top: 20px;
+}
+
+.session-chart-box {
+    width: 100%;
+    height: 220px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    margin: 20px 0;
+    padding: 10px;
+    position: relative;
+}
+
+#sessionAuditCanvas { 
+    width: 100%; 
+    height: 100%; 
+}
+
+/* Universal Cyber Button Architecture */
+.cyber-btn { 
+    background: linear-gradient(135deg, var(--pink-neon), var(--purple-glow)); 
+    border: none; 
+    color: white; 
+    padding: 14px 32px; 
+    border-radius: 12px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    cursor: pointer; 
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.4); 
+}
+
+.cyber-btn:hover { 
+    opacity: 0.9; 
+    transform: translateY(-1px); 
+}
+
+/* UI Helper Utility Matrices */
+.text-center { text-align: center; }
+.text-pink { color: var(--pink-neon); }
+.text-cyan { color: var(--cyan-accent); }
+.text-muted { color: var(--text-muted); }
+.uppercase { text-transform: uppercase; }
+.tracking-wide { letter-spacing: 1px; }
+.full-width { width: 100%; }
+
+/* Structural Keyframe Processing Timelines */
+@keyframes redAlert {
+    0% { background-color: #0a050d; }
+    100% { background-color: #380214; }
+}
+
+@keyframes targetPulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    100% { transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 30px var(--pink-neon); }
+}

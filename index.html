@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Alarm and Tracker</title>
+    <!-- Typography & Style Assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Core Computer Vision Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
+    <header>
+        <div class="logo">⚡ <span>Productivity Tracker and Alarm</span></div>
+        <nav>
+            <button id="nav-dash" class="active-nav" onclick="switchView('view-dashboard')">Telemetry Deck</button>
+            <button id="nav-arena" onclick="switchView('view-arena')">Reflex Arena</button>
+            <button id="nav-report" onclick="switchView('view-report')">Audit Logs</button>
+        </nav>
+    </header>
+
+    <!-- PAGE 1: TELEMETRY DECK -->
+    <main id="view-dashboard" class="app-view active-view">
+        <div class="column-group">
+            <div class="glass-panel panel-feed">
+                <div class="feed-box">
+                    <video id="webcam" autoplay playsinline></video>
+                    <canvas id="output_canvas"></canvas>
+                </div>
+            </div>
+            
+            <div class="glass-panel">
+                <h3 class="panel-subtitle">Biometric Parameters Switch</h3>
+                <div class="panel-row">
+                    <span class="row-label">Siren Tone Waveform</span>
+                    <select id="alarmTone">
+                        <option value="sawtooth">Sawtooth Cyber-Synth (Harsh)</option>
+                        <option value="triangle">Triangle Wave (Standard)</option>
+                    </select>
+                </div>
+                <div class="panel-row">
+                    <span class="row-label">Eye Sensitivity Calibration</span>
+                    <input type="range" id="sensitivityRange" min="15" max="28" value="21">
+                </div>
+            </div>
+        </div>
+
+        <div class="column-group">
+            <div class="glass-panel panel-tally">
+                <div>
+                    <h4 class="stat-label">Fatigue Drops</h4>
+                    <p class="stat-sub">Total combined incidents</p>
+                </div>
+                <div class="value-huge" id="sleepyTally">0</div>
+            </div>
+
+            <div class="glass-panel">
+                <h4 class="stat-label">Real-Time Eye & Mouth Matrix</h4>
+                <div class="spark-box">
+                    <canvas id="sparklineCanvas"></canvas>
+                </div>
+                <div class="matrix-readout">
+                    <span>EAR Ratio: <strong id="earValue" class="text-cyan">0.00</strong></span>
+                    <span>Mouth Opening: <strong id="marValue" class="text-pink">0.00</strong></span>
+                </div>
+            </div>
+
+            <div class="glass-panel panel-intel">
+                <h4 class="intel-title">System Intel</h4>
+                Biometric tracking matrices trace physical fatigue shifts natively. If mouth layout dimensions indicate a yawn, or eyelids fall for 1.4 seconds, an immediate lockdown sequence initializes.
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE 2: REFLEX ARENA -->
+    <div id="view-arena" class="app-view text-center">
+        <div class="glass-panel arena-header">
+            <h2 id="arena-status" class="text-cyan">Arena Standby Mode</h2>
+            <p class="arena-desc">When the alarm triggers, a neon Node spawns below. Hit it immediately to clear the tracking lockdown.</p>
+        </div>
+        <div class="arena-zone" id="arenaZone">
+            <div class="target-node" id="targetNode" onclick="hitReflexTarget()"></div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: AUDIT LOGS -->
+    <div id="view-report" class="app-view text-center">
+        <div class="glass-panel audit-box">
+            <h2 class="uppercase tracking-wide">Attention Audit Summary</h2>
+            <p class="stat-sub text-muted">Session Productivity Index:</p>
+            <div class="value-huge final-score" id="finalScoreText">100%</div>
+            
+            <h4 class="chart-title">Productivity Over Time</h4>
+            <div class="session-chart-box">
+                <canvas id="sessionAuditCanvas"></canvas>
+            </div>
+
+            <h3 id="verdictHeadline" class="text-cyan">Optimal Core Metrics</h3>
+            <button class="cyber-btn full-width" onclick="terminateSession()">Terminate Core App</button>
+        </div>
+    </div>
+
+    <!-- Application Script Logic Source -->
+    <script src="app.js"></script>
+</body>
+</html>
